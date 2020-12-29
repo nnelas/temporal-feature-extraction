@@ -1,4 +1,4 @@
-package pt.fcul.ppc.tfe;
+package pt.fcul.ppc.tfe.transaction;
 
 public class TransactionMapper {
     public TransactionMapper() {

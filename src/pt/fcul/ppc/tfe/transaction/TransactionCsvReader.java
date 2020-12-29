@@ -1,4 +1,4 @@
-package pt.fcul.ppc.tfe;
+package pt.fcul.ppc.tfe.transaction;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
