@@ -11,8 +11,8 @@ public class Transaction {
     private final int creditCard;
     private final int latitude;
     private final int longitude;
-    private int currentSellerAmount;
-    private int currentBuyerAmount;
+    private float currentSellerAverage;
+    private float currentBuyerAverage;
 
     public Transaction(int time, int year, int month, int day, int amount, int buyer,
                        int seller, int creditCard, int latitude, int longitude) {
@@ -68,12 +68,12 @@ public class Transaction {
         return longitude;
     }
 
-    public void setCurrentSellerAmount(int currentSellerAmount) {
-        this.currentSellerAmount = currentSellerAmount;
+    public void setCurrentSellerAverage(float currentSellerAverage) {
+        this.currentSellerAverage = currentSellerAverage;
     }
 
-    public void setCurrentBuyerAmount(int currentBuyerAmount) {
-        this.currentBuyerAmount = currentBuyerAmount;
+    public void setCurrentBuyerAverage(float currentBuyerAverage) {
+        this.currentBuyerAverage = currentBuyerAverage;
     }
 
     @Override
@@ -89,8 +89,28 @@ public class Transaction {
                 ", creditCard=" + creditCard +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", currentSellerAmount=" + currentSellerAmount +
-                ", currentBuyerAmount=" + currentBuyerAmount +
+                ", currentSellerAverage=" + currentSellerAverage +
+                ", currentBuyerAverage=" + currentBuyerAverage +
                 '}';
+    }
+
+    public static String getHeader() {
+        return "time,year,month,day,amount,buyer,seller,creditCard,latitude,longitude," +
+                "currentSellerAverage,currentBuyerAverage";
+    }
+
+    public String toCsv() {
+        return time + "," +
+                year + "," +
+                month + "," +
+                day + "," +
+                amount + "," +
+                buyer + "," +
+                seller + "," +
+                creditCard + "," +
+                latitude + "," +
+                longitude + "," +
+                currentSellerAverage + "," +
+                currentBuyerAverage;
     }
 }

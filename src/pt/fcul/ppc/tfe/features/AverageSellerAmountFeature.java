@@ -15,21 +15,23 @@ public class AverageSellerAmountFeature implements Feature {
     @Override
     public void run(ArrayList<Transaction> transactions) {
         for (Transaction transaction : transactions) {
-            int seller = transaction.getSeller();
+            int sellerId = transaction.getSeller();
 
-            Integer currentAmount = 0;
-            String key = "seller/" + seller;
+            String key = "seller/" + sellerId;
             if (cache.contains(key)) {
-                currentAmount = (Integer) cache.get(key);
-                transaction.setCurrentSellerAmount(currentAmount);
+                Seller seller = (Seller) cache.get(key);
+                float currentAverage = seller.getCurrentAverage();
+                transaction.setCurrentSellerAverage(currentAverage);
+
+                int currentAmount = seller.getCurrentAmount();
                 currentAmount += transaction.getAmount();
-                cache.put(key, currentAmount);
+                int currentNumTransactions = seller.getCurrentNumTransactions() + 1;
+                cache.put(key, new Seller(currentNumTransactions, currentAmount));
             } else {
-                cache.put(key, transaction.getAmount());
-                transaction.setCurrentSellerAmount(currentAmount);
+                transaction.setCurrentSellerAverage(0f);
+                cache.put(key, new Seller(1, transaction.getAmount()));
             }
             System.out.println(transaction.toString());
-            System.out.println("Inside cache: " + cache.get(key));
         }
     }
 }
