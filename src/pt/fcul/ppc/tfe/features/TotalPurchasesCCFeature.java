@@ -5,7 +5,7 @@ import pt.fcul.ppc.tfe.transaction.Transaction;
 
 import java.util.ArrayList;
 
-public class TotalPurchasesCCFeature implements Feature{
+public class TotalPurchasesCCFeature implements Feature {
     private final Cache cache;
 
     public TotalPurchasesCCFeature(Cache cache) {

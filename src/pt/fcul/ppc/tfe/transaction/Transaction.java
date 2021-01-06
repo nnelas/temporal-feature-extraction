@@ -131,7 +131,7 @@ public class Transaction {
                 buyer + "," +
                 seller + "," +
                 creditCard + "," +
-                position.getLatitude()+ "," +
+                position.getLatitude() + "," +
                 position.getLongitude() + "," +
                 currentSellerAverage + "," +
                 currentBuyerAverage + "," +

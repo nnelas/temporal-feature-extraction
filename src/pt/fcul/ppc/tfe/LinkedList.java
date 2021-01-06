@@ -27,7 +27,7 @@ public class LinkedList {
     public int getAverage() {
         int sum = 0;
         int limit = Math.min(currentIndex, capacity);
-        for (int i = 0; i < limit; i++) {;
+        for (int i = 0; i < limit; i++) {
             sum += linkedList[i];
         }
         return sum / capacity;
