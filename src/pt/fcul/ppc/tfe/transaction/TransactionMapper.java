@@ -9,7 +9,8 @@ public class TransactionMapper {
                 Integer.parseInt(rawTransaction[1]), Integer.parseInt(rawTransaction[2]),
                 Integer.parseInt(rawTransaction[3]), Integer.parseInt(rawTransaction[4]),
                 Integer.parseInt(rawTransaction[5]), Integer.parseInt(rawTransaction[6]),
-                Integer.parseInt(rawTransaction[7]), Integer.parseInt(rawTransaction[8]),
-                Integer.parseInt(rawTransaction[9]));
+                Integer.parseInt(rawTransaction[7]),
+                new Position(Integer.parseInt(rawTransaction[8]),
+                        Integer.parseInt(rawTransaction[9])));
     }
 }

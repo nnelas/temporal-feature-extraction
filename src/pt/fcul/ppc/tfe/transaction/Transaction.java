@@ -9,13 +9,18 @@ public class Transaction {
     private final int buyer;
     private final int seller;
     private final int creditCard;
-    private final int latitude;
-    private final int longitude;
+    private final Position position;
     private float currentSellerAverage;
     private float currentBuyerAverage;
+    private float currentSellerLastMonthAverage;
+    private float currentSellerLastNAverage;
+    private double currentSellerAveragePlus;
+    private double currentDistanceLastPos;
+    private int currentCreditCardTotal;
+    private float currentBuyerMonthlyAverage;
 
     public Transaction(int time, int year, int month, int day, int amount, int buyer,
-                       int seller, int creditCard, int latitude, int longitude) {
+                       int seller, int creditCard, Position position) {
         this.time = time;
         this.year = year;
         this.month = month;
@@ -24,12 +29,7 @@ public class Transaction {
         this.buyer = buyer;
         this.seller = seller;
         this.creditCard = creditCard;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public int getTime() {
-        return time;
+        this.position = position;
     }
 
     public int getYear() {
@@ -38,10 +38,6 @@ public class Transaction {
 
     public int getMonth() {
         return month;
-    }
-
-    public int getDay() {
-        return day;
     }
 
     public int getAmount() {
@@ -60,12 +56,8 @@ public class Transaction {
         return creditCard;
     }
 
-    public int getLatitude() {
-        return latitude;
-    }
-
-    public int getLongitude() {
-        return longitude;
+    public Position getPosition() {
+        return position;
     }
 
     public void setCurrentSellerAverage(float currentSellerAverage) {
@@ -74,6 +66,30 @@ public class Transaction {
 
     public void setCurrentBuyerAverage(float currentBuyerAverage) {
         this.currentBuyerAverage = currentBuyerAverage;
+    }
+
+    public void setCurrentSellerLastMonthAverage(float currentSellerLastMonthAverage) {
+        this.currentSellerLastMonthAverage = currentSellerLastMonthAverage;
+    }
+
+    public void setCurrentSellerLastNAverage(float currentSellerLastNAverage) {
+        this.currentSellerLastNAverage = currentSellerLastNAverage;
+    }
+
+    public void setCurrentSellerAveragePlus(double currentSellerAveragePlus) {
+        this.currentSellerAveragePlus = currentSellerAveragePlus;
+    }
+
+    public void setCurrentDistanceLastPos(double currentDistanceLastPos) {
+        this.currentDistanceLastPos = currentDistanceLastPos;
+    }
+
+    public void setCurrentCreditCardTotal(int currentCreditCardTotal) {
+        this.currentCreditCardTotal = currentCreditCardTotal;
+    }
+
+    public void setCurrentBuyerMonthlyAverage(float currentBuyerMonthlyAverage) {
+        this.currentBuyerMonthlyAverage = currentBuyerMonthlyAverage;
     }
 
     @Override
@@ -87,16 +103,23 @@ public class Transaction {
                 ", buyer=" + buyer +
                 ", seller=" + seller +
                 ", creditCard=" + creditCard +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
+                ", position=" + position +
                 ", currentSellerAverage=" + currentSellerAverage +
                 ", currentBuyerAverage=" + currentBuyerAverage +
+                ", currentSellerLastMonthAverage=" + currentSellerLastMonthAverage +
+                ", currentSellerLastNAverage=" + currentSellerLastNAverage +
+                ", currentSellerAveragePlus=" + currentSellerAveragePlus +
+                ", currentDistanceLastPos=" + currentDistanceLastPos +
+                ", currentCreditCardTotal=" + currentCreditCardTotal +
+                ", currentBuyerMonthlyAverage=" + currentBuyerMonthlyAverage +
                 '}';
     }
 
     public static String getHeader() {
         return "time,year,month,day,amount,buyer,seller,creditCard,latitude,longitude," +
-                "currentSellerAverage,currentBuyerAverage";
+                "currentSellerAverage,currentBuyerAverage,currentSellerLastMonthAverage," +
+                "currentSellerLastNAverage,currentSellerAveragePlus,currentDistanceLastPos," +
+                "currentCreditCardTotal,currentBuyerMonthlyAverage";
     }
 
     public String toCsv() {
@@ -108,9 +131,15 @@ public class Transaction {
                 buyer + "," +
                 seller + "," +
                 creditCard + "," +
-                latitude + "," +
-                longitude + "," +
+                position.getLatitude()+ "," +
+                position.getLongitude() + "," +
                 currentSellerAverage + "," +
-                currentBuyerAverage;
+                currentBuyerAverage + "," +
+                currentSellerLastMonthAverage + "," +
+                currentSellerLastNAverage + "," +
+                currentSellerAveragePlus + "," +
+                currentDistanceLastPos + "," +
+                currentCreditCardTotal + "," +
+                currentBuyerMonthlyAverage;
     }
 }

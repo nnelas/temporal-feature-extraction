@@ -5,10 +5,10 @@ import pt.fcul.ppc.tfe.transaction.Transaction;
 
 import java.util.ArrayList;
 
-public class AverageBuyerAmountFeature implements Feature {
+public class AverageBuyerMonthlyFeature implements Feature {
     private final Cache cache;
 
-    public AverageBuyerAmountFeature(Cache cache) {
+    public AverageBuyerMonthlyFeature(Cache cache) {
         this.cache = cache;
     }
 
@@ -17,18 +17,19 @@ public class AverageBuyerAmountFeature implements Feature {
         for (Transaction transaction : transactions) {
             int buyerId = transaction.getBuyer();
 
-            String key = "buyer/" + buyerId;
+            String key = "buyer/" + buyerId +
+                    "/month/" + transaction.getMonth();
             if (cache.contains(key)) {
                 Buyer buyer = (Buyer) cache.get(key);
                 float currentAverage = buyer.getCurrentAverage();
-                transaction.setCurrentBuyerAverage(currentAverage);
+                transaction.setCurrentBuyerMonthlyAverage(currentAverage);
 
                 int currentAmount = buyer.getCurrentAmount();
                 currentAmount += transaction.getAmount();
                 int currentNumTransactions = buyer.getCurrentNumTransactions() + 1;
                 cache.put(key, new Buyer(currentNumTransactions, currentAmount));
             } else {
-                transaction.setCurrentBuyerAverage(0f);
+                transaction.setCurrentBuyerMonthlyAverage(0f);
                 cache.put(key, new Buyer(1, transaction.getAmount()));
             }
             // System.out.println(transaction.toString());

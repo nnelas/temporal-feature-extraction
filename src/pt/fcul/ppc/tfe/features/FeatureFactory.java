@@ -14,6 +14,26 @@ public class FeatureFactory {
 
         AverageSellerAmountFeature averageSellerAmountFeature = new AverageSellerAmountFeature(cache);
         features.add(averageSellerAmountFeature);
+
+        AverageSellerLastMonthFeature averageSellerLastMonthFeature
+                = new AverageSellerLastMonthFeature(cache);
+        features.add(averageSellerLastMonthFeature);
+
+        AverageSellerLastNFeature averageSellerLastNFeature = new AverageSellerLastNFeature(cache);
+        features.add(averageSellerLastNFeature);
+
+        AverageSellerAmountPlusFeature averageSellerAmountPlusFeature
+                = new AverageSellerAmountPlusFeature(cache);
+        features.add(averageSellerAmountPlusFeature);
+
+        DistanceLastPosFeature distanceLastPosFeature = new DistanceLastPosFeature(cache);
+        features.add(distanceLastPosFeature);
+
+        TotalPurchasesCCFeature totalPurchasesCCFeature = new TotalPurchasesCCFeature(cache);
+        features.add(totalPurchasesCCFeature);
+
+        AverageBuyerMonthlyFeature averageBuyerMonthlyFeature = new AverageBuyerMonthlyFeature(cache);
+        features.add(averageBuyerMonthlyFeature);
         return features;
     }
 }
