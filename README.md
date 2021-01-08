@@ -1,2 +1,2 @@
 # temporal-feature-extraction
-Efficient Temporal Feature Extraction, using Machine-Learning
+Efficient Temporal Feature Extraction, for Machine-Learning
