@@ -162,4 +162,4 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all,macos,linux
 
-examples/output*
+examples/*.csv
