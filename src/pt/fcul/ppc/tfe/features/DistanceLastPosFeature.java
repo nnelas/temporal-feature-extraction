@@ -28,6 +28,11 @@ public class DistanceLastPosFeature implements Feature {
         // System.out.println(transaction);
     }
 
+    @Override
+    public FeaturePrimaryKey getPrimaryKey() {
+        return FeaturePrimaryKey.BUYER;
+    }
+
     private double calculateDistance(Position current, Position lastPosition) {
         int latitude = Math.abs(current.getLatitude() - lastPosition.getLatitude());
         int longitude = Math.abs(current.getLongitude() - lastPosition.getLongitude());

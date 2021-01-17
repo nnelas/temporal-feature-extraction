@@ -24,7 +24,8 @@ public class FeatureService {
                 if (multiThreadManager != null) {
                     multiThreadManager.execute(feature, transaction);
                 } else {
-                    System.out.println("Running " + feature.getClass().getSimpleName());
+                    //System.out.println("Running " + feature.getClass().getSimpleName() +
+                    //        " on " + transaction.toString());
                     feature.run(transaction);
                 }
             }

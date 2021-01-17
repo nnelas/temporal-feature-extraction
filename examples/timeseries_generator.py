@@ -1,15 +1,10 @@
 import os
 import sys
 import random
+import argparse
 
-averages = {}
-stddev = 100
-number_of_lines = 1000000
-number_of_sellers = number_of_lines / 1000
-hacks = 20
-hack_odds = 3
 
-def row(i):
+def row(i: int, number_of_sellers: int) -> list:
     time = i
     
     t = time / 1000
@@ -24,10 +19,22 @@ def row(i):
     longitude = random.randint(-500, 500)
     return [time, year, month, day, amount, buyer, seller, credit_card, latitude, longitude]
 
-def row_as_str(r):
+def row_as_str(r: list) -> str:
     return ",".join([ str(e) for e in r ]) + "\n"
 
 if __name__ == '__main__':
-    with open("dataset.csv", "w") as f:
-        for i in range(number_of_lines):
-            f.write(row_as_str(row(i)))
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--number_of_lines", "-l", type=int,
+                    help="Number of lines for dataset", required=True)
+    ap.add_argument("--output", "-out", type=str,
+                    help="Output path of dataset", required=True)
+    args = ap.parse_args()
+
+    print(f"Executing timeseries_generator.py for {args.number_of_lines} transactions")
+    number_of_sellers = int(args.number_of_lines / 1000) + 1
+
+    with open(args.output, "w") as f:
+        for i in range(args.number_of_lines):
+            f.write(row_as_str(row(i, number_of_sellers)))
+
+    print(f"Finished. Output path: {args.output}")
