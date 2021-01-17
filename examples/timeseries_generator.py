@@ -13,9 +13,9 @@ def row(i):
     time = i
     
     t = time / 1000
-    day = (t % 30) + 1
-    month = ((t / 30) % 12) + 1
-    year = (t / 30 / 12) + 2016
+    day = int((t % 30) + 1)
+    month = int(((t / 30) % 12) + 1)
+    year = int((t / 30 / 12) + 2016)
     amount = random.randint(10, 10000)
     buyer = random.randint(0, 50)
     seller = random.randint(0, number_of_sellers)
