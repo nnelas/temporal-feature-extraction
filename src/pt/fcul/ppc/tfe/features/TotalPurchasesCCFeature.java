@@ -30,4 +30,9 @@ public class TotalPurchasesCCFeature implements Feature {
         // System.out.println(transaction.toString());
 
     }
+
+    @Override
+    public FeaturePrimaryKey getPrimaryKey() {
+        return FeaturePrimaryKey.CREDIT_CARD;
+    }
 }

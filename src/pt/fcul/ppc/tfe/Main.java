@@ -4,8 +4,9 @@ import pt.fcul.ppc.tfe.features.api.Feature;
 import pt.fcul.ppc.tfe.features.api.FeatureFactory;
 import pt.fcul.ppc.tfe.features.api.FeatureService;
 import pt.fcul.ppc.tfe.multithreading.MultiThreadManager;
-import pt.fcul.ppc.tfe.transaction.Transaction;
+import pt.fcul.ppc.tfe.multithreading.ThreadShardingManager;
 import pt.fcul.ppc.tfe.transaction.BufferedTransactionCsvReader;
+import pt.fcul.ppc.tfe.transaction.Transaction;
 import pt.fcul.ppc.tfe.transaction.TransactionCsvWriter;
 import pt.fcul.ppc.tfe.transaction.TransactionMapper;
 
@@ -20,19 +21,23 @@ public class Main {
         String outputFilePath = args[1];
         System.out.println("Using CSV file: " + inputFilePath);
 
-        // TODO: think of buffered read, for each line, run features
-        // TODO: increase CSV to run in 1/2 min seq - DONE, current 2:20
-        // sharding , futures ,
         // order in write is not important
-
         // perhaps number of features can increase (and see if improves)
         BufferedTransactionCsvReader bufferedTransactionCsvReader =
                 new BufferedTransactionCsvReader(new TransactionMapper(), inputFilePath);
 
-        MultiThreadManager multiThreadManager = new MultiThreadManager(NUMBER_OF_THREADS);
+        ThreadShardingManager threadShardingManager;
+        try {
+            threadShardingManager = new ThreadShardingManager(NUMBER_OF_THREADS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        MultiThreadManager multiThreadManager = new MultiThreadManager(threadShardingManager);
+        FeatureService featureService = new FeatureService(multiThreadManager);
 
         List<Feature> features = FeatureFactory.create();
-        FeatureService featureService = new FeatureService(multiThreadManager);
         ArrayList<Transaction> transactions = featureService.run(features,
                 bufferedTransactionCsvReader);
 

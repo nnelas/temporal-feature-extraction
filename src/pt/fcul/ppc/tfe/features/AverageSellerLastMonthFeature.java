@@ -35,4 +35,9 @@ public class AverageSellerLastMonthFeature implements Feature {
         // System.out.println(transaction.toString());
 
     }
+
+    @Override
+    public FeaturePrimaryKey getPrimaryKey() {
+        return FeaturePrimaryKey.SELLER;
+    }
 }
