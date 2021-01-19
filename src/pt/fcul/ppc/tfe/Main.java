@@ -21,8 +21,6 @@ public class Main {
         String outputFilePath = args[1];
         System.out.println("Using CSV file: " + inputFilePath);
 
-        // order in write is not important
-        // perhaps number of features can increase (and see if improves)
         BufferedTransactionCsvReader bufferedTransactionCsvReader =
                 new BufferedTransactionCsvReader(new TransactionMapper(), inputFilePath);
 
@@ -34,6 +32,7 @@ public class Main {
             return;
         }
 
+        // To run sequential version, multiThreadManager = null
         MultiThreadManager multiThreadManager = new MultiThreadManager(threadShardingManager);
         FeatureService featureService = new FeatureService(multiThreadManager);
 
